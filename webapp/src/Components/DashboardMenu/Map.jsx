@@ -6,7 +6,6 @@ const Map = () => {
   return (
     <Link to="/dashboard/map">
       <Button
-        as="a"
         leftIcon={<FaMapMarkedAlt />}
         colorScheme="teal"
         variant="solid"

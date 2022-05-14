@@ -9,12 +9,10 @@ const Dashboard = ({ children }) => {
     <Grid templateColumns={"repeat(12,1fr)"} gap={4} minHeight="100vh">
       <GridItem colSpan={4}>
         <User />
-        <Map />
         <TrafficReport />
+        <Map />
       </GridItem>
-      <GridItem colSpan={8} bg={"gray"}>
-        {children}
-      </GridItem>
+      <GridItem colSpan={8}>{children}</GridItem>
     </Grid>
   )
 }
