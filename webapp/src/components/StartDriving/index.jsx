@@ -1,48 +1,61 @@
-import { IconButton, Flex } from "@chakra-ui/react"
-import { PhoneIcon, AtSignIcon } from "@chakra-ui/icons"
-import React, { useState, useEffect } from "react"
-import { notifyForTrafficJam } from "../../api/backend-api"
+import { IconButton, Flex } from "@chakra-ui/react";
+import { PhoneIcon, AtSignIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from "react";
+import { notifyForTrafficJam } from "../../api/backend-api";
+import { mockEvent } from "../../utils/mock-data-util";
+import useLocation from "../../hooks/useLocation";
 
-const NEARBY_DEVICES_LIMIT = 2
-const THIRTY_SECONDS = 1 * 1000
+const NEARBY_DEVICES_LIMIT = 2;
+const FIVE_SECONDS = 5 * 1000;
 
 const StartDriving = () => {
-  const [isDriving, setDriving] = useState(false)
-  const [nearbyDevices, setNearbyDevices] = useState(0)
-  const toggleDriving = () => setDriving(!isDriving)
+  const [isDriving, setDriving] = useState(false);
+  const { location } = useLocation();
+  const [nearbyDevices, setNearbyDevices] = useState(0);
+  const toggleDriving = () => setDriving(!isDriving);
 
-  const iconProps = { w: 6, h: 6 }
+  const iconProps = { w: 6, h: 6 };
 
   useEffect(() => {
     const fetchNearbyBluetoothDevices = async () => {
-      console.log("triggered")
-      const devices = await navigator.bluetooth.getDevices()
-      console.log(devices)
-      if (!devices) {
-        return setNearbyDevices(0)
+      try {
+        const devices = await navigator.bluetooth.getDevices();
+        if (!devices || devices.length === 0) {
+          // return setNearbyDevices(0);
+          throw new Error("use mock data for demo purposes");
+        }
+        setNearbyDevices(devices.length);
+      } catch (e) {
+        const { numberOfDevices } = mockEvent();
+        setNearbyDevices(numberOfDevices);
       }
-      setNearbyDevices(devices.length)
-    }
+    };
 
     const subscription = setInterval(
       isDriving ? fetchNearbyBluetoothDevices : () => {},
-      THIRTY_SECONDS
-    )
-    return () => clearInterval(subscription)
-  }, [isDriving])
+      FIVE_SECONDS
+    );
+    // fetchNearbyBluetoothDevices();
+    return () => clearInterval(subscription);
+  }, [isDriving]);
 
   useEffect(() => {
     const triggerTrafficJamEvent = async () => {
-      await notifyForTrafficJam()
-    }
+      const data = {
+        nearbyDevices,
+        lat: location.lat,
+        lng: location.lng,
+      };
+      await notifyForTrafficJam(data);
+    };
 
     if (nearbyDevices >= NEARBY_DEVICES_LIMIT) {
-      triggerTrafficJamEvent()
+      triggerTrafficJamEvent();
     }
-  }, [nearbyDevices])
+  }, [nearbyDevices]);
 
   return (
-    <Flex w="100%" alignItems={"center"} justifyContent="center" mt={8}>
+    <Flex w='100%' alignItems={"center"} justifyContent='center' mt={8}>
       <IconButton
         onClick={toggleDriving}
         p={12}
@@ -56,7 +69,7 @@ const StartDriving = () => {
         isRound
       />
     </Flex>
-  )
-}
+  );
+};
 
-export default StartDriving
+export default StartDriving;

@@ -4,6 +4,6 @@ const BACKEND_API = create({
   baseURL: "localhost:3000",
 });
 
-export const notifyForTrafficJam = async () => {
+export const notifyForTrafficJam = async (data) => {
   console.log("NOTIFY");
 };
