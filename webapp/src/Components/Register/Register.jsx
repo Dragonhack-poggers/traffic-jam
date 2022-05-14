@@ -5,86 +5,144 @@ import {
   InputGroup,
   Input,
   InputLeftElement,
-  InputRightElement,
   Button,
-  FormHelperText,
   Link,
   chakra,
   Stack,
-} from "@chakra-ui/react"
-import { FaUserAlt, FaLock } from "react-icons/fa"
+  useToast,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { FaUserAlt, FaLock } from "react-icons/fa";
+import { registerUser } from "../../api/auth-api";
 
-const CFaUserAlt = chakra(FaUserAlt)
-const CFaLock = chakra(FaLock)
+const CFaUserAlt = chakra(FaUserAlt);
+const CFaLock = chakra(FaLock);
 
-const Login = (props) => {
+const RegisterForm = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
+  const toast = useToast();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      email.length <= 0 ||
+      password.length <= 0 ||
+      repeatPassword.length <= 0
+    ) {
+      toast({
+        variant: "solid",
+        status: "error",
+        title: "Error",
+        description: "Fields must not be empty",
+      });
+      return;
+    }
+
+    if (password !== repeatPassword) {
+      toast({
+        variant: "solid",
+        status: "error",
+        title: "Error",
+        description: "Passwords do not match",
+      });
+      return;
+    }
+    try {
+      await registerUser({ email, password });
+      toast({
+        variant: "solid",
+        status: "success",
+        title: "Success",
+        description: "Success",
+      });
+    } catch {
+      toast({
+        variant: "solid",
+        status: "error",
+        title: "Error",
+        description: "Error when registering",
+      });
+    }
+  };
+
   return (
     <Flex
-      flexDirection="column"
-      width="100wh"
-      height="100vh"
-      backgroundColor="gray.200"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <form>
-        <Box>
-          <Stack
-            spacing={4}
-            p="1rem"
-            backgroundColor="whiteAlpha.900"
-            boxShadow="md"
-            borderRadius="md"
-          >
-            <FormControl>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<CFaUserAlt color="gray.300" />}
-                />
-                <Input type="email" placeholder="email address" />
-              </InputGroup>
-            </FormControl>
-            <FormControl>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray.300"
-                  children={<CFaLock color="gray.300" />}
-                />
-                <Input type="password" placeholder="Password" />
-              </InputGroup>
-            </FormControl>
-            <FormControl>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray.300"
-                  children={<CFaLock color="gray.300" />}
-                />
-                <Input type="password" placeholder="Repeat password" />
-              </InputGroup>
-            </FormControl>
-            <Button
-              borderRadius="md"
-              type="submit"
-              variant="solid"
-              colorScheme="teal"
-              width="full"
-            >
-              Register
-            </Button>
-          </Stack>
-        </Box>
-      </form>
+      flexDirection='column'
+      width='100wh'
+      height='100vh'
+      backgroundColor='gray.200'
+      justifyContent='center'
+      alignItems='center'>
+      <Box>
+        <Stack
+          spacing={4}
+          p='1rem'
+          backgroundColor='whiteAlpha.900'
+          boxShadow='md'
+          borderRadius='md'>
+          <FormControl>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+                children={<CFaUserAlt color='gray.300' />}
+              />
+              <Input
+                type='email'
+                placeholder='email address'
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+                color='gray.300'
+                children={<CFaLock color='gray.300' />}
+              />
+              <Input
+                type='password'
+                placeholder='Password'
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents='none'
+                color='gray.300'
+                children={<CFaLock color='gray.300' />}
+              />
+              <Input
+                type='password'
+                placeholder='Repeat password'
+                onChange={(e) => setRepeatPassword(e.target.value)}
+              />
+            </InputGroup>
+          </FormControl>
+          <Button
+            onClick={onSubmit}
+            borderRadius='md'
+            type='submit'
+            variant='solid'
+            colorScheme='teal'
+            width='full'>
+            Register
+          </Button>
+        </Stack>
+      </Box>
       <Box>
         Already an user?{" "}
-        <Link color="teal.500" href="#">
+        <Link color='teal.500' href='#'>
           Sign In
         </Link>
       </Box>
     </Flex>
-  )
-}
+  );
+};
 
-export default Login
+export default RegisterForm;
