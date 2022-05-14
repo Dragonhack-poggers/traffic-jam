@@ -70,6 +70,15 @@ const Login = (props) => {
                 <Link>forgot password?</Link>
               </FormHelperText>
             </FormControl>
+            <Button
+              borderRadius="md"
+              type="submit"
+              variant="solid"
+              colorScheme="teal"
+              width="full"
+            >
+              Login
+            </Button>
           </Stack>
         </Box>
       </form>
