@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const router = express.Router({});
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.use('/closure', closureRouter);
+router.use('/cover/minimal', minCoverRouter);
+router.use('/cover/canonical', canCoverRouter);
+router.use('/primary-key', primKeyRouter);
+router.use('/foreign-key', forKeyRouter);
+router.use('/normalization', normalizationRouter);
+router.use('/convert-to-sql', convSQLRouter);
+router.use('/check', checkRouter);
 
-module.exports = router;
+export default router;
