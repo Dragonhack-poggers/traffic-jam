@@ -1,16 +1,18 @@
-import "./App.css"
-import { ChakraProvider } from "@chakra-ui/react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import LoginPage from "./pages/LoginPage"
-import Dashboard from "./pages/Dashboard"
-import RegisterForm from "./Components/Register/Register"
-import Test from "./Components/DashboardCharts/Test"
+import "./App.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import RegisterForm from "./Components/Register/Register";
+import Test from "./Components/DashboardCharts/Test";
 import { AppProvider } from "./lib/AppContext";
+import ReloadPrompt from "./Components/ReloadPrompt";
 
 function App() {
   return (
     <ChakraProvider>
       <AppProvider>
+        <ReloadPrompt />
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<LoginPage />} />
@@ -18,7 +20,7 @@ function App() {
               path='/dashboard'
               element={
                 <Dashboard>
-                    <Test />
+                  <Test />
                 </Dashboard>
               }
             />
