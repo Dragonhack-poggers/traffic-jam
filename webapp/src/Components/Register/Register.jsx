@@ -14,16 +14,24 @@ import {
 import { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { registerUser } from "../../api/auth-api";
+import { useAppContext } from "../../lib/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
-const RegisterForm = (props) => {
+const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-
+  const { setUser, user } = useAppContext();
+  const navigate = useNavigate();
   const toast = useToast();
+
+  if (user) {
+    navigate("/");
+    return;
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -50,14 +58,17 @@ const RegisterForm = (props) => {
       });
       return;
     }
+
     try {
-      await registerUser({ email, password });
+      const user = await registerUser({ email, password });
+      setUser(user);
       toast({
         variant: "solid",
         status: "success",
         title: "Success",
         description: "Success",
       });
+      navigate("/");
     } catch {
       toast({
         variant: "solid",

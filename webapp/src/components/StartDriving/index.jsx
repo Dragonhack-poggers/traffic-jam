@@ -55,7 +55,7 @@ const StartDriving = () => {
   }, [nearbyDevices]);
 
   return (
-    <Flex w='100%' alignItems={"center"} justifyContent='center' mt={8}>
+    <Flex w='100%' alignItems={"center"} justifyContent='center'>
       <IconButton
         onClick={toggleDriving}
         p={12}
