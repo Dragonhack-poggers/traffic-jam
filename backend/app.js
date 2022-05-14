@@ -1,17 +1,15 @@
-import express from 'express';
-import swaggerOptions from './config';
-import router from './routes';
+const express = require('express');
 
-export const app = express();
+const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-app.use('/api', router);
+app.post('/event', (req, resp) => {
+    resp.send({ hello: 'qrold'});
+});
 
 const PORT = 3000;
 
-expressJSDocSwagger(app)(swaggerOptions);
-
 app.listen(PORT);
 
+module.exports = app;
