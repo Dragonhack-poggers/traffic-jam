@@ -7,7 +7,6 @@ const TrafficReport = () => {
   return (
     <Link to="/dashboard/">
       <Button
-        as="a"
         leftIcon={<FaCar />}
         colorScheme="teal"
         variant="solid"

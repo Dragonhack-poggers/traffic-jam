@@ -3,10 +3,8 @@ import { ChakraProvider } from "@chakra-ui/react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LoginPage from "./pages/LoginPage"
 import Dashboard from "./pages/Dashboard"
-import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RegisterForm from "./Components/Register/Register";
+import RegisterForm from "./Components/Register/Register"
+import Test from "./Components/DashboardCharts/Test"
 
 function App() {
   return (
@@ -18,7 +16,7 @@ function App() {
             path="/dashboard"
             element={
               <Dashboard>
-                <div>TrafficReport</div>
+                <Test />
               </Dashboard>
             }
           />
