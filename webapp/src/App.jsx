@@ -2,6 +2,7 @@ import "./App.css"
 import { ChakraProvider } from "@chakra-ui/react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from "./Components/Login/Login"
+import Register from "./Components/Register/Register"
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<div>1</div>} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<div>2</div>} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

@@ -22,6 +22,7 @@ const Login = (props) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const handleShowClick = () => setShowPassword(!showPassword)
+
   return (
     <Flex
       flexDirection="column"
@@ -60,23 +61,28 @@ const Login = (props) => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                 />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                    {showPassword ? "Hide" : "Show"}
-                  </Button>
-                </InputRightElement>
               </InputGroup>
-              <FormHelperText textAlign="right">
-                <Link>forgot password?</Link>
-              </FormHelperText>
+            </FormControl>
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  children={<CFaLock color="gray.300" />}
+                />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Repeat password"
+                />
+              </InputGroup>
             </FormControl>
           </Stack>
         </Box>
       </form>
       <Box>
-        Not registered yet?{" "}
+        Already an user?{" "}
         <Link color="teal.500" href="#">
-          Sign Up
+          Sign In
         </Link>
       </Box>
     </Flex>
