@@ -1,13 +1,24 @@
-import { Container } from "@chakra-ui/react";
-import React from "react";
-import StartDriving from "../components/StartDriving";
+import { Flex } from "@chakra-ui/react"
+import React from "react"
+import StartDriving from "../components/StartDriving"
+import Login from "../Components/Login/Login"
 
 const LoginPage = () => {
   return (
-    <Container maxW={"container.xl"}>
+    <Flex
+      flexDirection="column"
+      width="100wh"
+      height="100vh"
+      backgroundColor="gray.200"
+      justifyContent="center"
+      alignItems="center"
+    >
+      {/* <Container maxW={"container.xl"}> */}
       <StartDriving />
-    </Container>
-  );
-};
+      <Login />
+      {/* </Container> */}
+    </Flex>
+  )
+}
 
-export default LoginPage;
+export default LoginPage
