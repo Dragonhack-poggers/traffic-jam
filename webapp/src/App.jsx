@@ -1,9 +1,12 @@
 import "./App.css"
 import { ChakraProvider } from "@chakra-ui/react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Register from "./Components/Register/Register"
 import LoginPage from "./pages/LoginPage"
 import Dashboard from "./pages/Dashboard"
+import "./App.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RegisterForm from "./Components/Register/Register";
 
 function App() {
   return (
@@ -29,7 +32,7 @@ function App() {
           />
           {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/home" element={<div>2</div>} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<RegisterForm />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

@@ -5,7 +5,7 @@ import { notifyForTrafficJam } from "../../api/backend-api";
 import { mockEvent } from "../../utils/mock-data-util";
 import useLocation from "../../hooks/useLocation";
 
-const NEARBY_DEVICES_LIMIT = 2;
+const NEARBY_DEVICES_LIMIT = 50;
 const FIVE_SECONDS = 5 * 1000;
 
 const StartDriving = () => {
