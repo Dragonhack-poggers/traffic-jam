@@ -12,17 +12,12 @@ import {
   chakra,
   Stack,
 } from "@chakra-ui/react"
-import { useState } from "react"
 import { FaUserAlt, FaLock } from "react-icons/fa"
 
 const CFaUserAlt = chakra(FaUserAlt)
 const CFaLock = chakra(FaLock)
 
 const Login = (props) => {
-  const [showPassword, setShowPassword] = useState(false)
-
-  const handleShowClick = () => setShowPassword(!showPassword)
-
   return (
     <Flex
       flexDirection="column"
@@ -57,10 +52,7 @@ const Login = (props) => {
                   color="gray.300"
                   children={<CFaLock color="gray.300" />}
                 />
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                />
+                <Input type="password" placeholder="Password" />
               </InputGroup>
             </FormControl>
             <FormControl>
@@ -70,12 +62,18 @@ const Login = (props) => {
                   color="gray.300"
                   children={<CFaLock color="gray.300" />}
                 />
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Repeat password"
-                />
+                <Input type="password" placeholder="Repeat password" />
               </InputGroup>
             </FormControl>
+            <Button
+              borderRadius="md"
+              type="submit"
+              variant="solid"
+              colorScheme="teal"
+              width="full"
+            >
+              Register
+            </Button>
           </Stack>
         </Box>
       </form>
