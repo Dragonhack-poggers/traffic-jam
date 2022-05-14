@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import StartDriving from "../components/StartDriving";
+import StartDriving from "../Components/StartDriving";
 import Login from "../Components/Login/Login";
 
 const LoginPage = () => {
