@@ -11,6 +11,7 @@ import {
   Link,
   chakra,
   Stack,
+  Container,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import { FaUserAlt, FaLock } from "react-icons/fa"
@@ -24,12 +25,10 @@ const Login = (props) => {
   const handleShowClick = () => setShowPassword(!showPassword)
   return (
     <Flex
-      flexDirection="column"
-      width="100wh"
-      height="100vh"
-      backgroundColor="gray.200"
-      justifyContent="center"
-      alignItems="center"
+      flexDirection={"column"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      my={4}
     >
       <form>
         <Box>
