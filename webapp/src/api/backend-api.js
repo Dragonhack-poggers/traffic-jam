@@ -1,7 +1,10 @@
 import { create } from "apisauce";
 
+const DEMO_API = "https://rush-hour-jam-4mgu58xfh-dh-lame.vercel.app/";
+const LOCAL_API = "http://localhost:3000";
+
 const BACKEND_API = create({
-  baseURL: "http://localhost:3000",
+  baseURL: DEMO_API,
 });
 
 export const notifyForTrafficJam = async (data) => {
