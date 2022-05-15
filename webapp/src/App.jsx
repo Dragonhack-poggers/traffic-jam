@@ -8,27 +8,32 @@ import { AppProvider } from "./lib/AppContext";
 import ReloadPrompt from "./Components/ReloadPrompt";
 import Map from "./Components/Map";
 import Charts from "./pages/Charts";
+import TablePage from "./pages/TablePage";
+import { DashboardProvider } from "./lib/DashboardContext";
 
 function App() {
   return (
     <ChakraProvider>
       <AppProvider>
-        <ReloadPrompt />
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<LoginPage />} />
-            <Route path='/dashboard' element={<Charts />} />
-            <Route
-              path='/dashboard/map'
-              element={
-                <Dashboard>
-                  <Map />
-                </Dashboard>
-              }
-            />
-            <Route path='/register' element={<RegisterForm />} />
-          </Routes>
-        </BrowserRouter>
+        <DashboardProvider>
+          <ReloadPrompt />
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<LoginPage />} />
+              <Route path='/dashboard' element={<Charts />} />
+              <Route
+                path='/dashboard/map'
+                element={
+                  <Dashboard>
+                    <Map />
+                  </Dashboard>
+                }
+              />
+              <Route path='/register' element={<RegisterForm />} />
+              <Route path='/dashboard/table' element={<TablePage />} />
+            </Routes>
+          </BrowserRouter>
+        </DashboardProvider>
       </AppProvider>
     </ChakraProvider>
   );

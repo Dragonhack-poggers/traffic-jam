@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useDashboardContext } from "../../lib/DashboardContext";
 import "./styles.css";
@@ -8,9 +8,19 @@ const LJUBLJANA = [46.0569, 14.5058];
 const DATE_FORMAT = "d.M.yyyy 'at' hh:mm";
 
 const Map = () => {
+  const [startingLocation, setLocation] = useState(LJUBLJANA);
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    if (params["long"] !== undefined && params["lat"] !== undefined) {
+      setLocation([parseFloat(params["long"]), parseFloat(params["lat"])]);
+    }
+  }, []);
+
   const { events } = useDashboardContext();
   return (
-    <MapContainer center={LJUBLJANA} zoom={12} scrollWheelZoom={false}>
+    <MapContainer center={startingLocation} zoom={12} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

@@ -19,7 +19,7 @@ export const DashboardProvider = ({ children }) => {
     init();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || !events) {
     return (
       <Flex
         position={"absolute"}
