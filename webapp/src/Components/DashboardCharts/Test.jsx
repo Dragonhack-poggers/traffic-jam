@@ -1,4 +1,4 @@
-import { Scatter } from "react-chartjs-2"
+import { Scatter } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   LinearScale,
@@ -6,8 +6,9 @@ import {
   LineElement,
   Tooltip,
   Legend,
-} from "chart.js"
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend)
+} from "chart.js";
+import { useDashboardContext } from "../../lib/DashboardContext";
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const data = {
   datasets: [
@@ -20,7 +21,7 @@ const data = {
       backgroundColor: "rgba(255, 99, 132, 1)",
     },
   ],
-}
+};
 
 const options = {
   scales: {
@@ -28,10 +29,12 @@ const options = {
       beginAtZero: true,
     },
   },
-}
+};
 
 const Test = () => {
-  return <Scatter options={options} data={data} />
-}
+  const { events } = useDashboardContext();
+  console.log({ events });
+  return <Scatter options={options} data={data} />;
+};
 
-export default Test
+export default Test;
