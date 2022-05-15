@@ -1,10 +1,12 @@
 const express = require('express');
 const { insertEvent, getEvents, upsertUser } = require('../backend/database/databaseConnection')
+cors = require("cors");
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 // Add event
 app.post('/event', async (req, resp) => {
