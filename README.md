@@ -1,7 +1,5 @@
 # Rush Hour ~ avoid traffic jams
 
-![rushhour](./rushhour.gif)
-
 <p align="center">
   <img src="https://github.com/Dragonhack-poggers/traffic-jam/blob/master/rush-hour.gif" />
 </p>
