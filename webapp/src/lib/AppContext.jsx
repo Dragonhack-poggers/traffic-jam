@@ -9,8 +9,6 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
   const [isLoading, setLoading] = useState(false);
 
-  console.log(user);
-
   useEffect(() => {
     const init = async () => {
       setLoading(true);
@@ -18,8 +16,6 @@ export const AppProvider = ({ children }) => {
       if (session?.user) {
         const { user } = session;
         setUser(user);
-      } else {
-        setUser('Please confirm e-mail')
       }
       setLoading(false);
     };

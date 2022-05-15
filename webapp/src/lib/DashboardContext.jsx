@@ -4,19 +4,20 @@ import { fetchEvents } from "../api/backend-api";
 
 const DashboardContext = createContext({});
 export const useDashboardContext = () => useContext(DashboardContext);
+const TWENTY_SECONDS = 20 * 1000;
 
 export const DashboardProvider = ({ children }) => {
   const [events, setEvents] = useState(undefined);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const init = async () => {
-      setLoading(true);
       const events = await fetchEvents();
       setEvents(events);
       setLoading(false);
     };
-    init();
+    setInterval(init, TWENTY_SECONDS);
+    return () => clearInterval(TWENTY_SECONDS);
   }, []);
 
   if (isLoading || !events) {
