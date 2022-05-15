@@ -13,3 +13,25 @@ export const notifyForTrafficJam = async (data) => {
 
   return true; // ALL GOOOD
 };
+
+export const updateUserScore = async (data) => {
+  console.log({ data });
+  const response = await BACKEND_API.post("/update-user", data);
+  if (response.status >= 400) {
+    throw new Error("Something went wrong!");
+  }
+
+  return true; // ALL GOOOD
+};
+
+export const fetchEvents = async () => {
+  try {
+    const response = await BACKEND_API.get("/event");
+    if (response.status >= 400) {
+      throw new Error("Something went wrong!");
+    }
+    return response.data;
+  } catch (error) {
+    return [];
+  }
+};
