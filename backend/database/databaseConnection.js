@@ -24,7 +24,7 @@ async function upsertUser(id = '75442486-0878-440c-9db1-a7006c25a39f', time = 45
 
   const { data } = await supabase.from('user').select(`time`).eq('id', id);
 
-  sumTime += (!!data[0].time) ? data[0].time : 0;
+  sumTime += (!!data) ? data[0].time : 0;
 
   await supabase
     .from('user')
