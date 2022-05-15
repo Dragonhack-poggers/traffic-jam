@@ -2,6 +2,10 @@
 
 ![rushhour](./rushhour.gif)
 
+<p align="center">
+  <img src="https://github.com/Dragonhack-poggers/traffic-jam/blob/master/rush-hour.gif" />
+</p>
+
 Rush Hour is an app that aims to monitor and prevent traffic jams. It focuses mostly on so-called phantom traffic jams. 
 Phantom traffic jams are called phantom, because they appear seemingly out of nowhere.
 They are mostly caused by drivers not driving at an appropriate safety distance. At close distance, one driver braking, causes other drivers behind him to brake as well.
