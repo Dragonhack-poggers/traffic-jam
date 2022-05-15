@@ -11,7 +11,7 @@ app.use(cors());
 // Add event
 app.post('/event', async (req, resp) => {
   const { body } = req;
-  const dbResponse = await insertEvent(body.long, body.lat, body.numberOfDevices);
+  const dbResponse = await insertEvent(body.long, body.lat, body.numberOfDevices, body.userId);
   resp.send('Success');
 });
 
@@ -21,12 +21,14 @@ app.get('/event', async (req, resp) => {
   resp.send(response);
 });
 
-// Log time to DB
+// Log time from users to DB
 app.post('/update-user', async (req, resp) => {
   const { body } = req;
   const dbResponse = await upsertUser(body.userId, body.time);
   resp.send('Success');
 });
+
+
 
 const PORT = 3000;
 
