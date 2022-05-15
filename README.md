@@ -29,6 +29,6 @@ They can turn in these points to receive a Highway pass discount. All data about
 
 ## Link
 
-https://www.rush-hour.netlify.app
+https://rush-hour.netlify.app
 
 https://www.rush-hour.tech
