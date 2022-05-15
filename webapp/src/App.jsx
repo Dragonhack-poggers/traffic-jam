@@ -1,12 +1,13 @@
-import "./App.css"
-import { ChakraProvider } from "@chakra-ui/react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import LoginPage from "./pages/LoginPage"
-import Dashboard from "./pages/Dashboard"
-import RegisterForm from "./Components/Register/Register"
-import Test from "./Components/DashboardCharts/Test"
-import { AppProvider } from "./lib/AppContext"
+import "./App.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import RegisterForm from "./Components/Register/Register";
+import Test from "./Components/DashboardCharts/Test";
+import { AppProvider } from "./lib/AppContext";
 import ReloadPrompt from "./Components/ReloadPrompt";
+import Map from "./Components/Map";
 
 function App() {
   return (
@@ -15,9 +16,9 @@ function App() {
         <ReloadPrompt />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path='/' element={<LoginPage />} />
             <Route
-              path="/dashboard"
+              path='/dashboard'
               element={
                 <Dashboard>
                   <Test />
@@ -25,21 +26,21 @@ function App() {
               }
             />
             <Route
-              path="/dashboard/map"
+              path='/dashboard/map'
               element={
                 <Dashboard>
-                  <div>Map</div>
+                  <Map />
                 </Dashboard>
               }
             />
             {/* <Route path="/login" element={<Login />} /> */}
-            <Route path="/home" element={<div>2</div>} />
-            <Route path="/register" element={<RegisterForm />} />
+            <Route path='/home' element={<div>2</div>} />
+            <Route path='/register' element={<RegisterForm />} />
           </Routes>
         </BrowserRouter>
       </AppProvider>
     </ChakraProvider>
-  )
+  );
 }
 
-export default App
+export default App;

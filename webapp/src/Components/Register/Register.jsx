@@ -24,7 +24,7 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const { setUser, user } = useAppContext();
+  const { user } = useAppContext();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -61,7 +61,6 @@ const RegisterForm = () => {
 
     try {
       const user = await registerUser({ email, password });
-      setUser(user);
       toast({
         variant: "solid",
         status: "success",
@@ -148,7 +147,7 @@ const RegisterForm = () => {
       </Box>
       <Box>
         Already an user?{" "}
-        <Link color='teal.500' href='#'>
+        <Link color='teal.500' href='/'>
           Sign In
         </Link>
       </Box>
