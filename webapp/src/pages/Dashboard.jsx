@@ -1,6 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import User from "../Components/DashboardMenu/User";
 import Map from "../Components/DashboardMenu/Map";
+import DashboardTable from "../Components/DashboardMenu/DashboardTable";
 import TrafficReport from "../Components/DashboardMenu/TrafficReport";
 import { DashboardProvider } from "../lib/DashboardContext";
 
@@ -12,6 +13,7 @@ const Dashboard = ({ children }) => {
           <User />
           <TrafficReport />
           <Map />
+          <DashboardTable />
         </GridItem>
         <GridItem colSpan={9}>{children}</GridItem>
       </Grid>
