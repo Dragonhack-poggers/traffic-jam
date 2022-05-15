@@ -1,19 +1,40 @@
-import { IconButton, Flex } from "@chakra-ui/react";
-import { PhoneIcon, AtSignIcon } from "@chakra-ui/icons";
+import { IconButton, Flex, Text } from "@chakra-ui/react";
 import { FaCar } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { notifyForTrafficJam } from "../../api/backend-api";
 import { mockEvent } from "../../utils/mock-data-util";
 import useLocation from "../../hooks/useLocation";
+import { useAppContext } from "../../lib/AppContext";
+import { differenceInMinutes, format } from "date-fns";
+import { updateUserScore } from "../../api/backend-api";
 
-const NEARBY_DEVICES_LIMIT = 50;
+const NEARBY_DEVICES_LIMIT = 89;
 const FIVE_SECONDS = 5 * 1000;
+const DATE_FORMAT = "hh:mm:ss";
 
 const StartDriving = () => {
   const [isDriving, setDriving] = useState(false);
   const { location } = useLocation();
   const [nearbyDevices, setNearbyDevices] = useState(0);
-  const toggleDriving = () => setDriving(!isDriving);
+  const [drivingSince, setDrivingSince] = useState(0);
+
+  const updateUser = async (minutes) => {
+    await updateUserScore({ userId: user?.id, time: minutes });
+  };
+
+  const toggleDriving = () => {
+    if (!isDriving) {
+      setDrivingSince(new Date());
+    } else {
+      const now = new Date();
+      const minutes = differenceInMinutes(now, drivingSince);
+      if (minutes > 0 && !!user) {
+        updateUser(minutes);
+      }
+    }
+    setDriving(!isDriving);
+  };
+  const { user } = useAppContext();
 
   useEffect(() => {
     const fetchNearbyBluetoothDevices = async () => {
@@ -34,7 +55,10 @@ const StartDriving = () => {
       isDriving ? fetchNearbyBluetoothDevices : () => {},
       FIVE_SECONDS
     );
-    // fetchNearbyBluetoothDevices();
+
+    if (!setDriving) {
+      clearInterval(drivingTimeSubscription);
+    }
     return () => clearInterval(subscription);
   }, [isDriving]);
 
@@ -54,7 +78,12 @@ const StartDriving = () => {
   }, [nearbyDevices]);
 
   return (
-    <Flex w='100%' alignItems={"center"} justifyContent='center'>
+    <Flex
+      w='100%'
+      alignItems={"center"}
+      justifyContent='center'
+      flexDir={"column"}
+      gap={4}>
       <IconButton
         onClick={toggleDriving}
         p={12}
@@ -64,6 +93,18 @@ const StartDriving = () => {
         isRound
         marginTop={"3em"}
       />
+      {isDriving && (
+        <>
+          <Text textAlign={"center"} fontWeight='bold'>{`Driving since ${format(
+            drivingSince,
+            DATE_FORMAT
+          )}.`}</Text>
+          <Text textAlign={"center"} fontWeight='bold'>{`Time now ${format(
+            new Date(),
+            DATE_FORMAT
+          )}.`}</Text>
+        </>
+      )}
     </Flex>
   );
 };
