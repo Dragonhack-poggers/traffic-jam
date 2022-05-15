@@ -4,10 +4,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import RegisterForm from "./Components/Register/Register";
-import Test from "./Components/DashboardCharts/Test";
 import { AppProvider } from "./lib/AppContext";
 import ReloadPrompt from "./Components/ReloadPrompt";
 import Map from "./Components/Map";
+import Charts from "./pages/Charts";
 
 function App() {
   return (
@@ -17,14 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<LoginPage />} />
-            <Route
-              path='/dashboard'
-              element={
-                <Dashboard>
-                  <Test />
-                </Dashboard>
-              }
-            />
+            <Route path='/dashboard' element={<Charts />} />
             <Route
               path='/dashboard/map'
               element={
@@ -33,8 +26,6 @@ function App() {
                 </Dashboard>
               }
             />
-            {/* <Route path="/login" element={<Login />} /> */}
-            <Route path='/home' element={<div>2</div>} />
             <Route path='/register' element={<RegisterForm />} />
           </Routes>
         </BrowserRouter>
