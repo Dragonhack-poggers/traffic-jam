@@ -7,13 +7,13 @@ import { DashboardProvider } from "../lib/DashboardContext";
 const Dashboard = ({ children }) => {
   return (
     <DashboardProvider>
-      <Grid templateColumns={"repeat(12,1fr)"} gap={4} minHeight='100vh'>
-        <GridItem colSpan={4}>
+      <Grid templateColumns={"repeat(12,1fr)"} minHeight='100vh'>
+        <GridItem colSpan={3}>
           <User />
           <TrafficReport />
           <Map />
         </GridItem>
-        <GridItem colSpan={8}>{children}</GridItem>
+        <GridItem colSpan={9}>{children}</GridItem>
       </Grid>
     </DashboardProvider>
   );
