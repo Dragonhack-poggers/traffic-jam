@@ -7,16 +7,11 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      devOptions: {
-        enabled: true,
-      },
       includeAssets: [
         "favicon.svg",
         "favicon.ico",
         "robots.txt",
         "apple-touch-icon.png",
-        "pwa-192x192.png",
-        "pwa-512x512.png"
       ],
       manifest: {
         name: "Rush hour",
