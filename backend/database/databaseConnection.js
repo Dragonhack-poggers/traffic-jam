@@ -18,4 +18,18 @@ async function getEvents() {
   return data;
 }
 
-module.exports = { insertEvent, getEvents };
+async function upsertUser(id = '75442486-0878-440c-9db1-a7006c25a39f', time = 4500) {
+
+  let sumTime = time;
+
+  const { data } = await supabase.from('user').select(`time`).eq('id', id);
+
+  sumTime += (!!data[0].time) ? data[0].time : 0;
+
+  await supabase
+    .from('user')
+    .upsert({ id: id, time: sumTime });
+
+}
+
+module.exports = { insertEvent, getEvents, upsertUser };
