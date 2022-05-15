@@ -1,10 +1,10 @@
 import { Button } from "@chakra-ui/react"
-import { useState } from "react";
 import { FaUserAlt } from "react-icons/fa"
 import { useAppContext } from "../../lib/AppContext";
 const User = () => {
-
   const { user } = useAppContext();
+  if (!user) return null;
+  const email = user.email ?? 'User';
 
   return (
     <Button
@@ -15,9 +15,9 @@ const User = () => {
       justifyContent="left"
       height={"4em"}
     >
-      {user.email}
+      {email}
     </Button>
   )
 }
 
-export default User
+export default User;
