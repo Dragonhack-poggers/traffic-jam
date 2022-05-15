@@ -42,10 +42,45 @@ const BubbleChart = () => {
           label,
           data: datum,
           backgroundColor: "rgba(255, 99, 132, 1)",
+          options: {
+            tooltip: {
+              enabled: false,
+            },
+          },
         },
       ],
     };
   }, [events]);
+
+  const test = () => {
+    if (events === undefined) {
+      return [];
+    }
+
+    const label = "Points of interest";
+    const datum = events.map((e) => {
+      return {
+        x: e.long,
+        y: e.lat,
+        r: e.long + e.lat,
+      };
+    });
+
+    return {
+      datasets: [
+        {
+          label,
+          data: datum,
+          backgroundColor: "rgba(255, 99, 132, 1)",
+          options: {
+            tooltip: {
+              enabled: false,
+            },
+          },
+        },
+      ],
+    };
+  };
 
   if (!events) {
     return (
@@ -55,7 +90,7 @@ const BubbleChart = () => {
     );
   }
 
-  return <Bubble options={options} data={data} />;
+  return <Bubble options={options} data={test()} />;
 };
 
 export default BubbleChart;
